@@ -10,12 +10,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import cl.dgac.inspector.dtos.DtoExepcion;
 import jakarta.servlet.http.HttpServletRequest;
 
+@RestControllerAdvice
 public class ExepcionesGlobales {
-@ExceptionHandler(ErrorEnRecursos.class)
+    @ExceptionHandler(ErrorEnRecursos.class)
     public ResponseEntity<DtoExepcion> ErrorEnRecursos(ErrorEnRecursos ex,HttpServletRequest request){
         DtoExepcion error = new DtoExepcion(
             LocalDateTime.now(),
@@ -25,7 +27,8 @@ public class ExepcionesGlobales {
             request.getRequestURI()
         );
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);}
-@ExceptionHandler(MethodArgumentNotValidException.class)
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String,String>> exepcionesValicadionDto(MethodArgumentNotValidException ex){
         Map<String,String> errores = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach((error)->{
@@ -34,7 +37,8 @@ public class ExepcionesGlobales {
             errores.put(campo,mensaje);
         });
         return new ResponseEntity<>(errores,HttpStatus.BAD_REQUEST);}
-@ExceptionHandler(Exception.class)
+
+    @ExceptionHandler(Exception.class)
     public ResponseEntity<DtoExepcion> interlServErerror(Exception ex, HttpServletRequest request){
         DtoExepcion error = new DtoExepcion(
             LocalDateTime.now(),
@@ -43,9 +47,9 @@ public class ExepcionesGlobales {
             "ocurrio un   error inesperado" +ex.getMessage(),
             request.getRequestURI()
         );
-        return new ResponseEntity<>(error,HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-@ExceptionHandler(DataIntegrityViolationException.class)
+        return new ResponseEntity<>(error,HttpStatus.INTERNAL_SERVER_ERROR);}
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<DtoExepcion> manejarDuplicados(DataIntegrityViolationException ex, HttpServletRequest request){
         DtoExepcion error = new DtoExepcion(
             LocalDateTime.now(),

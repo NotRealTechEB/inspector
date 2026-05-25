@@ -20,9 +20,13 @@ public class Modelo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false, length = 25)
-    private String nombre, apellido;
+    private String nombre;
+    @Column(nullable = false, length = 25)
+    private String apellido;
     @Column(length = 25)
-    private String snombre,sapellido;
+    private String snombre;
+    @Column(length = 25)
+    private String sapellido;
     @Column(nullable = false, length = 15,unique = true)
     private String rut;
 }

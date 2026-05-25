@@ -1,4 +1,4 @@
-package cl.dgac.inspector.Mapper;
+package cl.dgac.inspector.mapper;
 
 import java.util.ArrayList;
 import java.util.List;

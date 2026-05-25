@@ -7,9 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import cl.dgac.inspector.Mapper.Mapper;
 import cl.dgac.inspector.dtos.DtoModel;
 import cl.dgac.inspector.exepciones.ErrorEnRecursos;
+import cl.dgac.inspector.mapper.Mapper;
 import cl.dgac.inspector.model.Modelo;
 import cl.dgac.inspector.service.Servicios;
 import jakarta.validation.Valid;

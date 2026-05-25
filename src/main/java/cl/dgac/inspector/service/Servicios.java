@@ -40,7 +40,7 @@ public class Servicios {
     }
 
     public List<Modelo> filtarnombreYapelldio(String name, String apellido){
-        List<Modelo>lista = repo.findByNombreAndApelldo(name, apellido);
+        List<Modelo>lista = repo.findByNombreAndApellido(name, apellido);
         if (lista.isEmpty()){
             throw new ErrorEnRecursos("inspector inexistente con esa combinacion de nombre y apellido");
         }
