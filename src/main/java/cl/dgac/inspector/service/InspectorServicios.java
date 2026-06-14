@@ -1,24 +1,24 @@
 package cl.dgac.inspector.service;
 
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import cl.dgac.inspector.dtos.DtoModel;
 import cl.dgac.inspector.exepciones.ErrorEnRecursos;
 import cl.dgac.inspector.mapper.Mapper;
-import cl.dgac.inspector.model.Modelo;
-import cl.dgac.inspector.repository.Repositorio;
+import cl.dgac.inspector.model.InspectorModelo;
+import cl.dgac.inspector.repository.InspectorRepositorio;
 
 @Service
-public class Servicios {
+public class InspectorServicios {
     
-    @Autowired
-    private Repositorio  repo;
+    private final InspectorRepositorio  repo;
+
+    public InspectorServicios(InspectorRepositorio repo){
+        this.repo = repo;
+    }
 
     public List<DtoModel> filtarpornombre(String name){
-        List<Modelo> lista = repo.findByNombre(name);
+        List<InspectorModelo> lista = repo.findByNombre(name);
         if(lista.isEmpty()){
             throw new ErrorEnRecursos("inspectaor inexistente con ese nombre");
         }
@@ -26,7 +26,7 @@ public class Servicios {
     
     }
     public List<DtoModel> filtarPorApellido(String apellido){
-        List<Modelo> lista = repo.findByApellido(apellido);
+        List<InspectorModelo> lista = repo.findByApellido(apellido);
         if(lista.isEmpty()){
             throw new ErrorEnRecursos("inspectaor inexistente con ese nombre");
         }
@@ -34,7 +34,7 @@ public class Servicios {
     }
 
     public List<DtoModel> listarInspector(){
-        List<Modelo> lista =repo.findAll();
+        List<InspectorModelo> lista =repo.findAll();
         if(lista.isEmpty()){
             throw new ErrorEnRecursos("no existe inspectores");
         }
@@ -42,7 +42,7 @@ public class Servicios {
     }
 
     public List<DtoModel> filtarnombreYapelldio(String name, String apellido){
-        List<Modelo>lista = repo.findByNombreAndApellido(name, apellido);
+        List<InspectorModelo>lista = repo.findByNombreAndApellido(name, apellido);
         if (lista.isEmpty()){
             throw new ErrorEnRecursos("inspector inexistente con esa combinacion de nombre y apellido");
         }
@@ -50,12 +50,12 @@ public class Servicios {
     }
 
     public DtoModel filtaRut (String rut){
-        Modelo modelo = repo.findByRut(rut).orElseThrow(
+        InspectorModelo modelo = repo.findByRut(rut).orElseThrow(
             ()-> new ErrorEnRecursos("el rut "+ rut +" no esta afiliado a ningun inspector"));
         return Mapper.modelToDto(modelo);
     }
 
-    public DtoModel save(Modelo entity){
+    public DtoModel save(InspectorModelo entity){
         repo.save(entity);
         return Mapper.modelToDto(entity) ;
     }
@@ -67,7 +67,7 @@ public class Servicios {
     }
 
     public DtoModel validarId(Long id){
-        Modelo model =repo.findById(id).orElseThrow( ()->new ErrorEnRecursos("Empresa con el id " + id + " no encontrada"));
+        InspectorModelo model =repo.findById(id).orElseThrow( ()->new ErrorEnRecursos("Empresa con el id " + id + " no encontrada"));
         return Mapper.modelToDto(model) ;
     }
 }

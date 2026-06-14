@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name="inspectores")
-public class Modelo {
+public class InspectorModelo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
