@@ -46,7 +46,7 @@ public class ExepcionesGlobales {
             errores.put(campo,mensaje);
         });
         return buildResponse(HttpStatus.BAD_REQUEST, 
-            "elementos en el json tienen problemas ",
+            "elementos en el json tienen problemas",
             request.getRequestURI(),
             errores);
         }
