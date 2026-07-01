@@ -79,7 +79,7 @@ public class Controller {
     @ApiResponse(responseCode = "404", description = "lista vacia es decir ningun inspector")})
     public ResponseEntity<DtoModel> addinspector(@Valid
         @RequestBody (
-        description = "Datos de la solicitud a crear",
+        description = "Datos del inspector a crear",
         required = true,
         content = @Content(
             mediaType = "application/json",
@@ -104,7 +104,7 @@ public class Controller {
     @Operation(summary = "obtener un inspector", description = "ingresas el rut para tener el isnpector luego lo cambioas mendiante el json correcto")
     public ResponseEntity<DtoModel> editarInspector(@RequestParam(name= "rut") String rut,@Valid  
     @RequestBody (
-        description = "Datos de la solicitud a crear",
+        description = "Datos del isnpector a actualizar",
         required = true,
         content = @Content(
             mediaType = "application/json",
